@@ -1,11 +1,40 @@
 {
-  "version": 2,
-  "buildCommand": "",
-  "outputDirectory": "",
-  "public": true,
-  "cleanUrls": true,
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/(.*)", "dest": "/index.html" }
-  ]
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "redirects": [
+      {
+        "source": "/antigo-caminho",
+        "destination": "/novo-caminho",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/api/**",
+        "function": "minhaFuncao"
+      },
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(jpg|jpeg|gif|png)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          }
+        ]
+      }
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false
+  }
 }
